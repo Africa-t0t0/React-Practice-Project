@@ -1,7 +1,7 @@
 import noProjectImage from '../assets/no-projects.png';
 import Button from './Button';
 
-export default function DefaultView () {
+export default function DefaultView ({ onStartAddProject }) {
 
     return (
         <div className="mt-24 text-center w-2/3">
@@ -21,7 +21,9 @@ export default function DefaultView () {
             <p
                 className='mt-8'
             >
-                <Button>
+                <Button
+                    onClick={onStartAddProject}
+                >
                     Create a new project
                 </Button>
             </p>
