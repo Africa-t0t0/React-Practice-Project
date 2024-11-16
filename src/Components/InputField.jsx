@@ -1,5 +1,6 @@
-export default function InputField({ labelName, textarea, ...props }) {
+import { forwardRef } from "react";
 
+const InputField = forwardRef(function InputField({ labelName, textarea, ...props}, ref) {
     const classes = "w-full p-1 border-b-2 rounded-sm border-stone300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600"
 
     return (
@@ -11,9 +12,15 @@ export default function InputField({ labelName, textarea, ...props }) {
                 htmlFor="">
                 {labelName}
             </label>
-            {textarea ? <textarea className={classes} {...props} />
+            {textarea ? <textarea ref={ref} className={classes} {...props} />
              :
-            <input className={classes} {...props} />}
+            <input
+                className={classes}
+                ref={ref}
+                {...props}
+            />}
         </p>
     );
-}
+})
+
+export default InputField;
