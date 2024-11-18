@@ -37,10 +37,21 @@ function App() {
     })
   }
 
+  function handleCancelAddProject () {
+    setProjectsState(
+      prevState => {
+        return {
+          ...prevState,
+          currentAction: 'not-selected'
+        }
+      }
+    );
+  }
+
   let content;
 
   if (projectsState.currentAction === 'adding') {
-    content = <ProjectForm onAdd={handleAddProject} />
+    content = <ProjectForm onAdd={handleAddProject} onCancel={handleCancelAddProject} />
   } else if (projectsState.currentAction === 'not-selected') {
     content = <DefaultView
                 onStartAddProject={handleStartProject}

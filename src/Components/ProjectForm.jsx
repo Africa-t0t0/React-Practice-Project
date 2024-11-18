@@ -3,7 +3,7 @@ import { useRef } from "react";
 import InputField from "./InputField"
 import Modal from "./Modal";
 
-export default function ProjectForm({ onAdd }) {
+export default function ProjectForm({ onAdd, onCancel }) {
 
     const title = useRef();
     const description = useRef();
@@ -30,8 +30,16 @@ export default function ProjectForm({ onAdd }) {
 
     const modalText = (
         <>
-            <h2>Invalid Input</h2>
-            <p>Please check the input, at least one field is invalid.</p>
+            <h2
+                className="text-xl font-bold text-stone-500 mt-4 my-4"
+            >
+                Invalid Input
+            </h2>
+            <p
+                className="className='text-stone-700 mb-4"
+            >
+                Please check the input, at least one field is invalid.
+            </p>
         </>
     );
 
@@ -48,7 +56,10 @@ export default function ProjectForm({ onAdd }) {
                     <li>
                         <button
                             className="text-stone-800 hover:text-stone-950"
-                        >Cancel</button>
+                            onClick={onCancel}
+                        >
+                            Cancel
+                        </button>
                     </li>
                     <li>
                         <button
