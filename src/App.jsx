@@ -31,6 +31,7 @@ function App() {
       }
       return {
         ...prevState,
+        currentAction: 'not-selected',
         projects: [...prevState.projects, newProject]
       }
     })
@@ -50,6 +51,7 @@ function App() {
     <main className="h-screen my-8 flex gap-8">
       <Sidebar
         onStartAddProject={handleStartProject}
+        projects={projectsState.projects}
       />
       {content}
     </main>
