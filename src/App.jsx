@@ -3,6 +3,7 @@ import { useState } from "react";
 import Sidebar from "./Components/Sidebar";
 import ProjectForm from "./Components/ProjectForm";
 import DefaultView from "./Components/DefaultView";
+import SelectedProject from "./Components/SelectedProject";
 
 function App() {
 
@@ -48,7 +49,21 @@ function App() {
     );
   }
 
-  let content;
+  function handleSelectProject (id) {
+    setProjectsState(
+      prevState => {
+        return {
+          ...prevState,
+          currentAction: 'selected',
+          selectedProject: id,
+        }
+      }
+    );
+  }
+
+  const selectedProject = projectsState.projects.find(project => project.id === projectsState.selectedProject)
+
+  let content = <SelectedProject project={selectedProject} />
 
   if (projectsState.currentAction === 'adding') {
     content = <ProjectForm onAdd={handleAddProject} onCancel={handleCancelAddProject} />
@@ -56,12 +71,15 @@ function App() {
     content = <DefaultView
                 onStartAddProject={handleStartProject}
               />
+  } else if (projectsState.currentAction === 'selected') {
+    content = <SelectedProject project={selectedProject} />
   }
 
   return (
     <main className="h-screen my-8 flex gap-8">
       <Sidebar
         onStartAddProject={handleStartProject}
+        onSelectProject={handleSelectProject}
         projects={projectsState.projects}
       />
       {content}
