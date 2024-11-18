@@ -12,7 +12,9 @@ export default function DefaultView ({ onStartAddProject }) {
             />
             <h2
                 className='text-xl font-bold text-stone-500 mt-4 my-4'
-            >No project selected</h2>
+            >
+                No project selected
+            </h2>
             <p
                 className='text-stone-400 mb-4'
             >

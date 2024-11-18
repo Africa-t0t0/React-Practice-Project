@@ -61,9 +61,22 @@ function App() {
     );
   }
 
+  function handleDeleteProject () {
+    setProjectsState(
+      prevState => {
+        return {
+          ...prevState,
+          selectedProject: undefined,
+          currentAction: "not-selected",
+          projects: prevState.projects.filter((project) => project.id !== prevState.selectedProject)
+        }
+      }
+    );
+  }
+
   const selectedProject = projectsState.projects.find(project => project.id === projectsState.selectedProject)
 
-  let content = <SelectedProject project={selectedProject} />
+  let content = <SelectedProject project={selectedProject} onDelete={handleDeleteProject} />
 
   if (projectsState.currentAction === 'adding') {
     content = <ProjectForm onAdd={handleAddProject} onCancel={handleCancelAddProject} />
@@ -71,8 +84,6 @@ function App() {
     content = <DefaultView
                 onStartAddProject={handleStartProject}
               />
-  } else if (projectsState.currentAction === 'selected') {
-    content = <SelectedProject project={selectedProject} />
   }
 
   return (

@@ -1,4 +1,4 @@
-export default function SelectedProject ({ project }) {
+export default function SelectedProject ({ project, onDelete }) {
 
     console.log("project", project)
 
@@ -23,6 +23,7 @@ export default function SelectedProject ({ project }) {
                     >{project.title}</h1>
                     <button
                         className="text-stone-600 hover:text-stone-959"
+                        onClick={onDelete}
                     >
                         Delete
                     </button>
