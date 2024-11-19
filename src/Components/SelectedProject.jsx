@@ -1,4 +1,6 @@
-export default function SelectedProject ({ project, onDelete }) {
+import Tasks from "./Tasks";
+
+export default function SelectedProject ({ tasks, project, onDelete, onAddTasks, onDeleteTasks }) {
 
     console.log("project", project)
 
@@ -35,7 +37,11 @@ export default function SelectedProject ({ project, onDelete }) {
                     className="text-stone-600 whitespace-pre-wrap"
                 >{project.description}</p>
             </header>
-        Tasks
+        <Tasks
+            onAdd={onAddTasks}
+            onDelete={onDeleteTasks}
+            tasks={tasks}
+        />
 
         </div>
     )

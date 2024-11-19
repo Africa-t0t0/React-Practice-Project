@@ -10,8 +10,34 @@ function App() {
   const [projectsState, setProjectsState] = useState({
     currentAction: 'not-selected',
     selectedProject: undefined,
-    projects: []
+    projects: [],
+    tasks: []
   });
+
+  function handleAddTasks(text) {
+    setProjectsState(prevState => {
+      const newTasks = {
+        text: text,
+        projectId: prevState.selectedProject,
+        id: Math.random()
+      }
+      return {
+        ...prevState,
+        tasks: [newTasks, ...prevState.tasks]
+      }
+    });
+  }
+
+  function handleDeleteTasks(id) {
+    setProjectsState(
+      prevState => {
+        return {
+          ...prevState,
+          tasks: prevState.tasks.filter((task) => task.id !== id)
+        }
+      }
+    );
+  }
 
   function handleStartProject () {
     setProjectsState(
@@ -35,7 +61,7 @@ function App() {
         currentAction: 'not-selected',
         projects: [...prevState.projects, newProject]
       }
-    })
+    });
   }
 
   function handleCancelAddProject () {
@@ -76,7 +102,13 @@ function App() {
 
   const selectedProject = projectsState.projects.find(project => project.id === projectsState.selectedProject)
 
-  let content = <SelectedProject project={selectedProject} onDelete={handleDeleteProject} />
+  let content = <SelectedProject
+                  project={selectedProject}
+                  onDelete={handleDeleteProject}
+                  onAddTasks={handleAddTasks}
+                  onDeleteTasks={handleDeleteTasks}
+                  tasks={projectsState.tasks}
+                />
 
   if (projectsState.currentAction === 'adding') {
     content = <ProjectForm onAdd={handleAddProject} onCancel={handleCancelAddProject} />
