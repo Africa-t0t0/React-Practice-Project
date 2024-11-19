@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function NewTasks({ onAdd }) {
 
-    const [enteredTasks, setEnteredTasks] = useState();
+    const [enteredTasks, setEnteredTasks] = useState('');
 
     function handleChange(event) {
         setEnteredTasks(event.target.value);

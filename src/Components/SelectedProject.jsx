@@ -2,7 +2,6 @@ import Tasks from "./Tasks";
 
 export default function SelectedProject ({ tasks, project, onDelete, onAddTasks, onDeleteTasks }) {
 
-    console.log("project", project)
 
     const formatedDate = new Date(project.date).toLocaleDateString('en-US', {
         year: 'numeric',
